@@ -37,18 +37,41 @@ def load_json(filename):
             return {}
 
 def convert_jsonl_to_target_format(data):
+    '''convert jsonl to json'''
     target_data = []
+    answer_option = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K'] # give enough options to avoid error
     for item in data:
         options = item.get('options', [])
-        options_str = ','.join(map(str, options))
-        instruction = f"{item.get('question', '')}, options: {options_str}, meta_info: {item.get('meta_info', '')}"
+
+        if not options:
+            continue
+        
+        if isinstance(options, list):
+            question_option = []
+            for ans, opt in zip(answer_option, map(str, options)):
+                question_option.append(ans + ': ' + opt)
+
+            options_str = ', '.join(map(str, question_option))
+
+            option = item.get("answer_idx", '').upper() if 'answer_idx' in item else item.get("answer", '').upper()
+            answer_index = answer_option.index(option) if option else ''
+            answer = answer_option[answer_index] + ': ' + options[answer_index] if answer_index is not None else ''
+        elif isinstance(options, dict):
+            question_option = []
+            for key, val in options.items():
+                question_option.append(key + ": " + val.strip())
+
+            options_str = ', '.join(map(str, question_option))
+
+            option = item.get("answer_idx", '').upper() if 'answer_idx' in item else item.get("answer", '').upper()
+            answer = option + ': ' + options[option].strip()
+
+        instruction = f"Answer the following multiple choice question: {item.get('question', '')}, {options_str}"
         instruction = re.sub(r'\u3000', ' ', instruction)
         question_entry = {
             "instruction": instruction,
             "input": "",
-            "output": item.get("answer", ""),
-            "system": "",
-            "history": ""
+            "output": answer,
         }
         target_data.append(question_entry)
     return target_data
@@ -56,13 +79,12 @@ def convert_jsonl_to_target_format(data):
 def convert_json_to_target_format(data):
     target_data = []
     for key, item in data.items():
-        system = f"LABELS: {item.get('LABELS', [])}, MESHES: {item.get('MESHES', [])}, YEAR: {item.get('YEAR', '')}"
+        instruction = f"Answer the biomedical research question: {item.get('QUESTION', '')}"
+
         question_entry = {
-            "instruction": item.get("QUESTION", ""),
-            "input": f"{item.get('CONTEXT', [])}",
+            "instruction": instruction,
+            "input": f"{' '.join(item.get('CONTEXTS', []))}",
             "output": item.get("LONG_ANSWER", ""),
-            "system": system,
-            "history": ""
         }
         target_data.append(question_entry)
     return target_data
@@ -82,12 +104,22 @@ for root, dirs, files in os.walk('./MedQA'):
     for file in files:
         if file.endswith('.jsonl') and not file.startswith('._'):
             jsonl_file = os.path.join(root, file)
+
+            # get filename
+            filename_with_extension = os.path.basename(jsonl_file)
+            filename, _ = os.path.splitext(filename_with_extension)
             
             raw_data = load_jsonl(jsonl_file)
             target_formatted_data = convert_jsonl_to_target_format(raw_data)
             
             # cover previuos files
-            save_to_jsonl(jsonl_file, target_formatted_data)
+            if os.path.exists(jsonl_file):
+                os.remove(jsonl_file)
+
+            save_path = os.path.join(root, filename + '.json')
+            save_to_json(save_path, target_formatted_data)
+
+            print(f"{filename_with_extension} transformation done.")
 
 
 for root, dirs, files in os.walk('./PubMedQA'):
@@ -100,5 +132,7 @@ for root, dirs, files in os.walk('./PubMedQA'):
 
             # cover the previous files
             save_to_json(json_file, target_formatted_data)
+
+            print(f"{os.path.basename(json_file)} transformation done.")
 
 print("Transformation done.")
