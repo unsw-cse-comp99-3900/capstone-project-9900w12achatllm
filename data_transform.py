@@ -66,25 +66,45 @@ def convert_jsonl_to_target_format(data):
             option = item.get("answer_idx", '').upper() if 'answer_idx' in item else item.get("answer", '').upper()
             answer = option + ': ' + options[option].strip()
 
-        instruction = f"Answer the following multiple choice question: {item.get('question', '')}, {options_str}"
-        instruction = re.sub(r'\u3000', ' ', instruction)
+        # instruction = f"Answer the following multiple choice question: {item.get('question', '')}, {options_str}"
+        # instruction = re.sub(r'\u3000', ' ', instruction)
+        # question_entry = {
+        #     "instruction": instruction,
+        #     "input": "",
+        #     "output": answer,
+        # }
+
+        # changed version
+        instruction = "Answer the following multiple choice question"
         question_entry = {
             "instruction": instruction,
-            "input": "",
+            "input": options_str,  # 将选项字符串放在 input 字段
             "output": answer,
         }
+
         target_data.append(question_entry)
     return target_data
 
 def convert_json_to_target_format(data):
     target_data = []
     for key, item in data.items():
-        instruction = f"Answer the biomedical research question: {item.get('QUESTION', '')}"
+        # instruction = f"Answer the biomedical research question: {item.get('QUESTION', '')}"
+        #
+        # question_entry = {
+        #     "instruction": instruction,
+        #     "input": f"{' '.join(item.get('CONTEXTS', []))}",
+        #     "output": item.get("LONG_ANSWER", ""),
+        # }
+        # target_data.append(question_entry)
+
+        # changed version
+        instruction = "Answer the biomedical research question given the question and contexts"
+        input_text = "QUESTION: " + item.get('QUESTION', '') + "\nCONTEXTS: " + ' '.join(item.get('CONTEXTS', []))
 
         question_entry = {
             "instruction": instruction,
-            "input": f"{' '.join(item.get('CONTEXTS', []))}",
-            "output": item.get("LONG_ANSWER", ""),
+            "input": input_text,
+            "output": item.get('final_decision', '') + ". " + item.get("LONG_ANSWER", ""),
         }
         target_data.append(question_entry)
     return target_data
@@ -124,7 +144,7 @@ for root, dirs, files in os.walk('./MedQA'):
 
 for root, dirs, files in os.walk('./PubMedQA'):
     for file in files:
-        if file.endswith('.json')  and not file.startswith('._'):
+        if file.endswith('.json') and not file.startswith('._'):
             json_file = os.path.join(root, file)
             
             raw_data = load_json(json_file)

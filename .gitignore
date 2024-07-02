@@ -163,4 +163,8 @@ cython_debug/
 user.config
 saves/
 cache/
+
 data/
+model/
+PubMedQA/
+MedQA/
