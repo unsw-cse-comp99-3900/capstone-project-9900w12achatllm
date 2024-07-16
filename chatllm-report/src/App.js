@@ -1,14 +1,8 @@
 import React from 'react';
-import { ChakraProvider, Box, Flex, Heading, Textarea, Accordion, AccordionItem, AccordionButton, AccordionPanel, AccordionIcon, VStack, Link } from '@chakra-ui/react';
+import { ChakraProvider, Box, Flex, Heading, Accordion, AccordionItem, AccordionButton, AccordionPanel, AccordionIcon, VStack, Link } from '@chakra-ui/react';
 import { BrowserRouter as Router, Route, Routes, Link as RouterLink } from 'react-router-dom';
-
-// 示例页面组件
-const Page = ({ title }) => (
-  <Box>
-    <Heading>{title}</Heading>
-    <Textarea placeholder={`这是${title}页面的内容`} />
-  </Box>
-);
+import Page from './Page';
+import RouteWrapper from './RouteWrapper';
 
 const App = () => {
   return (
@@ -21,16 +15,16 @@ const App = () => {
               <AccordionItem>
                 <AccordionButton>
                   <Box flex="1" textAlign="left">
-                    实验背景介绍
+                    Background
                   </Box>
                   <AccordionIcon />
                 </AccordionButton>
                 <AccordionPanel>
                   <VStack align="start" spacing="4">
-                    <Link as={RouterLink} to="/theory">理论基础</Link>
-                    <Link as={RouterLink} to="/model-introduction">模型介绍</Link>
-                    <Link as={RouterLink} to="/fine-tuning-method">微调方法介绍</Link>
-                    <Link as={RouterLink} to="/dataset-introduction">数据集介绍</Link>
+                    <Link as={RouterLink} to="/page/theory">Supporting Theories</Link>
+                    <Link as={RouterLink} to="/page/model-introduction">Model Introduction</Link>
+                    <Link as={RouterLink} to="/page/fine-tuning-method">Fine-Tuning Method Introduction</Link>
+                    <Link as={RouterLink} to="/page/dataset-introduction">Dataset Introduction</Link>
                   </VStack>
                 </AccordionPanel>
               </AccordionItem>
@@ -38,7 +32,7 @@ const App = () => {
               <AccordionItem>
                 <AccordionButton>
                   <Box flex="1" textAlign="left">
-                    实验设计
+                    Experimental design
                   </Box>
                   <AccordionIcon />
                 </AccordionButton>
@@ -47,15 +41,15 @@ const App = () => {
                     <AccordionItem>
                       <AccordionButton>
                         <Box flex="1" textAlign="left">
-                          同一模型不同微调方法对比
+                          Comparison Among Models
                         </Box>
                         <AccordionIcon />
                       </AccordionButton>
-                      <AccordionPanel>
+                      <AccordionPanel> 
                         <VStack align="start" spacing="4">
-                          <Link as={RouterLink} to="/model-a">模型A</Link>
-                          <Link as={RouterLink} to="/model-b">模型B</Link>
-                          <Link as={RouterLink} to="/model-c">模型C</Link>
+                          <Link as={RouterLink} to="/page/model-a">Qwen2-1.5B-instruct</Link>
+                          <Link as={RouterLink} to="/page/model-b">Qwen2-0.5B-instruct</Link>
+                          <Link as={RouterLink} to="/page/model-c">Phi-3-mini-4k-instruct</Link>
                         </VStack>
                       </AccordionPanel>
                     </AccordionItem>
@@ -63,15 +57,15 @@ const App = () => {
                     <AccordionItem>
                       <AccordionButton>
                         <Box flex="1" textAlign="left">
-                          同一微调方法不同模型对比
+                          Comparison Among Fine-Tuning Methods
                         </Box>
                         <AccordionIcon />
                       </AccordionButton>
                       <AccordionPanel>
                         <VStack align="start" spacing="4">
-                          <Link as={RouterLink} to="/fine-tuning-method1">微调方法1</Link>
-                          <Link as={RouterLink} to="/fine-tuning-method2">微调方法2</Link>
-                          <Link as={RouterLink} to="/fine-tuning-method3">微调方法3</Link>
+                          <Link as={RouterLink} to="/page/fine-tuning-method1">Lora</Link>
+                          <Link as={RouterLink} to="/page/fine-tuning-method2">QLora</Link>
+                          <Link as={RouterLink} to="/page/fine-tuning-method3">Freeze</Link>
                         </VStack>
                       </AccordionPanel>
                     </AccordionItem>
@@ -79,14 +73,14 @@ const App = () => {
                     <AccordionItem>
                       <AccordionButton>
                         <Box flex="1" textAlign="left">
-                          同一模型不同参数对比
+                          Comparison Among dataset
                         </Box>
                         <AccordionIcon />
                       </AccordionButton>
                       <AccordionPanel>
                         <VStack align="start" spacing="4">
-                          <Link as={RouterLink} to="/dataset1">数据集1</Link>
-                          <Link as={RouterLink} to="/dataset2">数据集2</Link>
+                          <Link as={RouterLink} to="/page/dataset1">MedQA</Link>
+                          <Link as={RouterLink} to="/page/dataset2">PubMedQA</Link>
                         </VStack>
                       </AccordionPanel>
                     </AccordionItem>
@@ -97,12 +91,12 @@ const App = () => {
               <AccordionItem>
                 <AccordionButton>
                   <Box flex="1" textAlign="left">
-                    总结
+                    Summary
                   </Box>
                   <AccordionIcon />
                 </AccordionButton>
                 <AccordionPanel>
-                  <Link as={RouterLink} to="/summary">总结</Link>
+                  <Link as={RouterLink} to="/page/summary">Summary</Link>
                 </AccordionPanel>
               </AccordionItem>
             </Accordion>
@@ -110,20 +104,8 @@ const App = () => {
 
           <Box flex="1" p="4">
             <Routes>
-              <Route path="/theory" element={<Page title="理论基础" />} />
-              <Route path="/model-introduction" element={<Page title="模型介绍" />} />
-              <Route path="/fine-tuning-method" element={<Page title="微调方法介绍" />} />
-              <Route path="/dataset-introduction" element={<Page title="数据集介绍" />} />
-              <Route path="/model-a" element={<Page title="模型A" />} />
-              <Route path="/model-b" element={<Page title="模型B" />} />
-              <Route path="/model-c" element={<Page title="模型C" />} />
-              <Route path="/fine-tuning-method1" element={<Page title="微调方法1" />} />
-              <Route path="/fine-tuning-method2" element={<Page title="微调方法2" />} />
-              <Route path="/fine-tuning-method3" element={<Page title="微调方法3" />} />
-              <Route path="/dataset1" element={<Page title="数据集1" />} />
-              <Route path="/dataset2" element={<Page title="数据集2" />} />
-              <Route path="/summary" element={<Page title="总结" />} />
-              <Route path="/" element={<Page title="首页" />} />
+              <Route path="/page/:pageId" element={<RouteWrapper element={<Page />} title="" />} />
+              <Route path="/" element={<Page title="Home" />} />
             </Routes>
           </Box>
         </Flex>
@@ -133,10 +115,3 @@ const App = () => {
 };
 
 export default App;
-
-
-
-
-
-
-
