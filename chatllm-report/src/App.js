@@ -2,7 +2,6 @@ import React from 'react';
 import { ChakraProvider, Box, Flex, Heading, Accordion, AccordionItem, AccordionButton, AccordionPanel, AccordionIcon, VStack, Link } from '@chakra-ui/react';
 import { BrowserRouter as Router, Route, Routes, Link as RouterLink } from 'react-router-dom';
 import Page from './Page';
-import RouteWrapper from './RouteWrapper';
 
 const App = () => {
   return (
@@ -104,7 +103,7 @@ const App = () => {
 
           <Box flex="1" p="4">
             <Routes>
-              <Route path="/page/:pageId" element={<RouteWrapper element={<Page />} title="" />} />
+              <Route path="/page/:pageId" element={<Page />} />
               <Route path="/" element={<Page title="Home" />} />
             </Routes>
           </Box>
