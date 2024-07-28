@@ -1,146 +1,15 @@
+// src/Page.js
 import React from 'react';
 import { useParams } from 'react-router-dom';
-import { Container, Box, Heading, VStack, Image, Text } from '@chakra-ui/react';
-import './App.js';
-
-const pageImages = {
-    'theory': [],
-    'model-introduction': [],
-    'fine-tuning-method': [],
-    'dataset-introduction':[],
-    'model-a': ['/pictures/4.jpg', '/pictures/1.jpg'],
-    'model-b': ['/pictures/0.5B_full.jpg', '/pictures/0.5B_lora.jpg'],
-    'model-c': ['/pictures/phi_lora.jpg', '/pictures/phi_lora_eval.jpg'],
-    'fine-tuning-method1': ['/pictures/4.jpg', '/pictures/1.jpg'],
-    'fine-tuning-method2': ['/pictures/5.jpg', '/pictures/3.jpg'],
-    'fine-tuning-method3': ['/pictures/freeze1.jpg', '/pictures/freeze2.jpg'],
-    'dataset1': [],
-    'dataset2': [],
-    'summary': []
-  };
 
 const Page = ({ title }) => {
-    const { pageId } = useParams();
-    const images = pageImages[pageId] || [];
-  
-    return (
-      <Container maxW="container.lg" py={10}>
-      <Box >
-        <Heading>{title}</Heading>
-        <VStack spacing={4}>
-          {pageId == 'theory' ? 
-            (
-            <Box p={6} borderRadius="md">
-              <VStack spacing={6}>
-                <Text fontSize='2xl'>
-                  In recent years, large language models (LLMs) show significant performance in natural language 
-                  processing tasks. For example, ChatGPT has shown great ability to answer diverse questions across 
-                  different domains such as code generating and storytelling. However, the average effect of general 
-                  models on domain-specific tasks is much lower than that on general tasks, and there are more problems 
-                  with knowledge hallucination. Moreover, the smaller the model size, the larger the gap.
-                </Text>
-                <Text fontSize='2xl'>
-                  Nowadays, there are usually two major ways to improve their out-of-the-box capabilities. The first 
-                  paradigm is LLM + domain knowledge base, such as RAG. RAG can offer reliable and up-to-date external 
-                  knowledge to improve factual accuracy, therefore reducing the hallucinations problem (Jiarui Li). 
-                  What's more, RAG has lower time and economic cost for updating knowledge. No training is required, 
-                  only updating the database is needed. However, this approach also has some limitations. Firstly, if 
-                  the model lacks the knowledge base in a certain field, RAG still cannot answer correctly because the 
-                  "domain thinking" needs to be internalized into the large model through a large amount of domain data. 
-                  Secondly, the content will be limited by the retrieval results. Some creative tasks are intended to 
-                  obtain new inspiration through large models. However, after the search results are given to large models, 
-                  large models are often easily restricted.
-                </Text>
-              </VStack>
-          </Box>) : <></>
-          }
-          {pageId == 'model-introduction' ? 
-            (
-            <Box p={6} borderRadius="md">
-              <VStack spacing={6}>
-                <Text fontSize='2xl'>
-                  Large Language Models (LLMs) are large-scale neural networks trained with deep learning techniques, 
-                  particularly using the Transformer architecture, designed to process and generate natural language 
-                  text. The Transformer architecture, proposed by Vaswani et al. in 2017 (Vaswani et al., 2017), is 
-                  specifically designed for processing sequential data, especially for natural language processing 
-                  tasks. It differs from traditional Recurrent Neural Networks (RNNs) and Long Short-Term Memory 
-                  Networks (LSTMs) (Hochreiter & Schmidhuber, 1997) in that it does not rely on the sequence order 
-                  for computation but instead captures the relationships between elements in a sequence through a 
-                  method called the self-attention mechanism.
-                </Text>
-                <Text fontSize='2xl'>
-                  The Transformer architecture can be divided into three main types: Encoder-Only, Encoder-Decoder, and 
-                  Decoder-Only architectures. The encoder consists of multiple identical layers, each including a 
-                  multi-head self-attention sublayer and a feed-forward neural network sublayer, which encodes the input 
-                  sequence (e.g., an English sentence) into a fixed-length context vector. The decoder is also composed 
-                  of multiple identical layers, each containing a multi-head self-attention sublayer, a multi-head 
-                  attention sublayer that interacts with the encoder, and a feed-forward neural network sublayer. This 
-                  structure decodes the context vectors generated by the encoder into a target sequence (e.g., a 
-                  translated sentence).
-                </Text>
-              </VStack>
-          </Box>) : <></>
-          }
-          {pageId == 'fine-tuning-method' ? 
-            (
-            <Box p={6} borderRadius="md">
-              <VStack spacing={6}>
-                <Text fontSize='2xl'>
-                  Fine-tuning pre-trained Large Language Models (LLMs), which are based on the Transformers 
-                  architecture, has become a standard paradigm for handling NLP tasks. Despite the strong transfer 
-                  learning capabilities of today's pre-trained LLMs (such as zero-shot inference), fine-tuning these 
-                  models on downstream datasets still yields significant performance improvements. Full parameter 
-                  fine-tuning involves adjusting all model parameters during the fine-tuning process. This approach 
-                  can enhance both the performance and the generalization ability of the model.
-                </Text>
-                <Text fontSize='2xl'>
-                  However, as the model size increases, fine-tuning all parameters on consumer-grade hardware becomes 
-                  impractical. Moreover, full fine-tuning can lead to a loss of diversity and catastrophic forgetting. 
-                  Consequently, efficiently conducting model fine-tuning has become a focal point of industry research, 
-                  spurring the rapid development of parameter-efficient fine-tuning technologies.
-                </Text>
-                <Text fontSize='2xl'>
-                  However, as the model size increases, fine-tuning all parameters on consumer-grade hardware becomes 
-                  impractical. Moreover, full fine-tuning can lead to a loss of diversity and catastrophic forgetting. 
-                  Consequently, efficiently conducting model fine-tuning has become a focal point of industry research, 
-                  spurring the rapid development of parameter-efficient fine-tuning technologies.
-                </Text>
-              </VStack>
-          </Box>) : <></>
-          }
-          {pageId == 'dataset-introduction' ? 
-            (
-            <Box p={6} borderRadius="md">
-              <VStack spacing={6}>
-                <Text fontSize='2xl'>
-                Problem Description: The selection of datasets should ensure data in a certain vertical field and 
-                maintain task diversity.
-                </Text>
-                <Text fontSize='2xl'>
-                  Alternatives: MedQA, PubMedQA
-                </Text>
-                <Text fontSize='2xl'>
-                  Reason for Selection: Both MedQA and PubMedQA are medical datasets, but they include different tasks. 
-                  MedQA is a diverse medical question-answering test benchmark covering medical examinations, consumer 
-                  health, and medical research. It is currently recognized as a benchmark for evaluating large medical 
-                  models in the industry. The dataset includes four or five possible answers. The development set 
-                  consists of 11,450 questions, and the test set contains 1,273 questions. PubMedQA is a closed-domain 
-                  question-answering dataset where each question can be answered by examining the relevant context 
-                  (PubMed abstract). It contains 1,000 expert-annotated question-answer pairs. Each question is 
-                  accompanied by a PubMed abstract as context, and the task is to provide a yes/no/maybe answer based on 
-                  the abstract information. The dataset is divided into 500 training questions and 500 test questions. 
-                  PubMedQA evaluates the model's ability to understand and reason about scientific biomedical literature.
-                </Text>
-              </VStack>
-          </Box>) : <></>
-          }
-          {images.map((src, index) => (
-            <Image key={index} src={src} alt={`${title} image ${index + 1}`} />
-          ))}
-        </VStack>
-      </Box>
-      </Container>
-    );
-  };
-  
-  export default Page;
+  const { pageId } = useParams();
+  return (
+    <div>
+      <h1>{title || pageId}</h1>
+      <p>Content for {title || pageId} page goes here.</p>
+    </div>
+  );
+};
+
+export default Page;
