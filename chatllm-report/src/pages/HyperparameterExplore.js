@@ -1,12 +1,17 @@
 // src/pages/HyperparameterExplore.js
 import React from 'react';
+import { Box, Heading, Text } from '@chakra-ui/react';
 
 const HyperparameterExplore = () => {
   return (
-    <div>
-      <h1>HyperparameterExplore</h1>
-      <p>Here is the content for HyperparameterExplore.</p>
-    </div>
+    <Box p={4}>
+      <Heading as="h1" size="xl" mb={6}>
+        Hyperparameter Exploration
+      </Heading>
+      <Text fontSize="lg" mb={4} textAlign="justify">
+        Needs to be finished.
+      </Text>
+    </Box>
   );
 };
 

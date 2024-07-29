@@ -177,7 +177,7 @@ const App = () => {
               <Route path="/models" element={<Models />} />
               <Route path="/fine-tuning-methods" element={<FineTuningMethods />} />
               <Route path="/datasets" element={<Datasets />} />
-              <Route path="/llma-board" element={<LLaMABoard />} />
+              <Route path="/llama-board" element={<LLaMABoard />} />
               <Route path="/command-line" element={<CommandLine />} />
               <Route path="/bleu-4" element={<Bleu4 />} />
               <Route path="/rouge-l" element={<RougeL />} />
