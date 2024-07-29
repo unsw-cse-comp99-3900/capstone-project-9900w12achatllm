@@ -1,7 +1,7 @@
-// src/pages/SupportingTheories.js
+// src/pages/IntroLLM.js
 import React from 'react';
 
-const SupportingTheories = () => {
+const IntroLLM = () => {
   return (
     <div>
       <h1>Supporting Theories</h1>
@@ -10,4 +10,4 @@ const SupportingTheories = () => {
   );
 };
 
-export default SupportingTheories;
+export default IntroLLM;

@@ -3,19 +3,25 @@ import { ChakraProvider, Box, Flex, Heading, Accordion, AccordionItem, Accordion
 import { BrowserRouter as Router, Route, Routes, Link as RouterLink } from 'react-router-dom';
 
 // Import page components
-import SupportingTheories from './pages/SupportingTheories';
-import ModelIntroduction from './pages/ModelIntroduction';
-import FineTuningMethod from './pages/FineTuningMethod';
-import DatasetIntroduction from './pages/DatasetIntroduction';
-import ModelA from './pages/ModelA';
-import ModelB from './pages/ModelB';
-import ModelC from './pages/ModelC';
-import FineTuningMethod1 from './pages/FineTuningMethod1';
-import FineTuningMethod2 from './pages/FineTuningMethod2';
-import FineTuningMethod3 from './pages/FineTuningMethod3';
-import Dataset1 from './pages/Dataset1';
-import Dataset2 from './pages/Dataset2';
-import Summary from './pages/Summary';
+import IntroLLM from './pages/IntroLLM';
+import LiteratureReviewLLM from './pages/LiteratureReviewLLM';
+import LiteratureReviewFineTuning from './pages/LiteratureReviewFineTuning';
+import Models from './pages/Models';
+import FineTuningMethods from './pages/FineTuningMethods';
+import Datasets from './pages/Datasets';
+import LLaMABoard from './pages/LLaMABoard';
+import CommandLine from './pages/CommandLine';
+import Bleu4 from './pages/Bleu4';
+import RougeL from './pages/RougeL';
+import Accuracy from './pages/Accuracy';
+import HyperparameterSetting from './pages/HyperparameterSetting';
+import FineTuningComparison from './pages/FineTuningComparison';
+import LLMComparison from './pages/LLMComparison';
+import UserDrivenEvaluationConclusion from './pages/UserDrivenEvaluationConclusion';
+import Limitations from './pages/Limitations';
+import DataTransform from './pages/DataTransform';
+import HyperparameterExplore from './pages/HyperparameterExplore';
+import References from './pages/References';
 import LossComparison from './pages/LossComparison'; // Import the new page component
 import Page from './Page';  // Assuming Page is a generic page component
 
@@ -24,22 +30,115 @@ const App = () => {
     <ChakraProvider>
       <Router>
         <Flex minH="100vh">
-          <Box w="240px" bg="gray.800" color="white" p="4">
+          <Box w="240px" bg="gray.800" color="white" p="4" overflowY="auto" height="100vh">
             <Heading size="md" mb="4">COMP9900 CHATLLM REPORT</Heading>
+
+            {/* 1. System Architecture Diagram */}
             <Accordion allowMultiple>
               <AccordionItem>
                 <AccordionButton>
                   <Box flex="1" textAlign="left">
-                    Background
+                    System Architecture Diagram
                   </Box>
                   <AccordionIcon />
                 </AccordionButton>
                 <AccordionPanel>
                   <VStack align="start" spacing="4">
-                    <Link as={RouterLink} to="/theories">Supporting Theories</Link>
-                    <Link as={RouterLink} to="/model-introduction">Model Introduction</Link>
-                    <Link as={RouterLink} to="/fine-tuning-method">Fine-Tuning Method Introduction</Link>
-                    <Link as={RouterLink} to="/dataset-introduction">Dataset Introduction</Link>
+                    <Link as={RouterLink} to="/introllm">Introduction of Large Language Models</Link>
+                    <Link as={RouterLink} to="/literature-review-llm">Literature Review of Large Language Models</Link>
+                    <Link as={RouterLink} to="/literature-review-fine-tuning">Literature Review of Fine-tuning Methods</Link>
+                  </VStack>
+                </AccordionPanel>
+              </AccordionItem>
+
+              {/* 2. Design Justification */}
+              <AccordionItem>
+                <AccordionButton>
+                  <Box flex="1" textAlign="left">
+                    Design Justifications
+                  </Box>
+                  <AccordionIcon />
+                </AccordionButton>
+                <AccordionPanel>
+                  <VStack align="start" spacing="4">
+                    <Link as={RouterLink} to="/models">The models we choose</Link>
+                    <Link as={RouterLink} to="/fine-tuning-methods">The fine-tuning methods we choose</Link>
+                    <Link as={RouterLink} to="/datasets">The dataset we choose</Link>
+                  </VStack>
+                  <AccordionItem>
+                      <AccordionButton>
+                        <Box flex="1" textAlign="left">
+                          Introduction of LLaMA-Factory
+                        </Box>
+                        <AccordionIcon />
+                      </AccordionButton>
+                      <AccordionPanel>
+                        <VStack align="start" spacing="4">
+                          <Link as={RouterLink} to="/llama-board">LLaMA Board</Link>
+                          <Link as={RouterLink} to="/command-line">Command Line</Link>
+                        </VStack>
+                      </AccordionPanel>
+                    </AccordionItem>
+                </AccordionPanel>
+              </AccordionItem>
+
+              {/* 3. User-Driven Evaluation of Solution */}
+              <AccordionItem>
+                <AccordionButton>
+                  <Box flex="1" textAlign="left">
+                    User-Driven Evaluation of Solution
+                  </Box>
+                  <AccordionIcon />
+                </AccordionButton>
+                <AccordionPanel>
+                  <AccordionItem>
+                    <AccordionButton>
+                      <Box flex="1" textAlign="left">
+                        Introduction of the Assessment Indicators
+                      </Box>
+                      <AccordionIcon />
+                    </AccordionButton>
+                    <AccordionPanel>
+                      <VStack align="start" spacing="4">
+                        <Link as={RouterLink} to="/bleu-4">BLEU-4</Link>
+                        <Link as={RouterLink} to="/rouge-l">ROUGE-L</Link>
+                        <Link as={RouterLink} to="/accuracy">Accuracy</Link>
+                      </VStack>
+                    </AccordionPanel>
+                  </AccordionItem>
+                  <VStack align="start" spacing="4">
+                    <Link as={RouterLink} to="/hyperparameter-setting-and-result">Hyperparameter Setting and Result</Link>
+                    <Link as={RouterLink} to="/Fine-tuning-Method-Comparison&Discussion">Fine-tuning Method Comparison & Discussion</Link>
+                    <Link as={RouterLink} to="/LLM-Comparison&Discussion">Large Language Model Comparison & Discussion</Link>
+                    <Link as={RouterLink} to="/user-driven-evaluation-conclusion">Conclusion</Link>
+                  </VStack>
+                </AccordionPanel>
+              </AccordionItem>
+
+              {/* 4. Limitations and Future Work */}
+              <AccordionItem>
+                <AccordionButton>
+                  <Box flex="1" textAlign="left">
+                    Limitations and Future Work
+                  </Box>
+                  <AccordionIcon />
+                </AccordionButton>
+                <AccordionPanel>
+                  <Link as={RouterLink} to="/limitations&future-work">Limitations and Future Work</Link>
+                </AccordionPanel>
+              </AccordionItem>
+
+              <AccordionItem>
+                <AccordionButton>
+                  <Box flex="1" textAlign="left">
+                    Engineering Practices
+                  </Box>
+                  <AccordionIcon />
+                </AccordionButton>
+                <AccordionPanel>
+                  <VStack align="start" spacing="4">
+                    <Link as={RouterLink} to="/data-transform">Data Transform</Link>
+                    <Link as={RouterLink} to="/hyperparameter-explore">Exploring Hyperparameter Setting</Link>
                   </VStack>
                 </AccordionPanel>
               </AccordionItem>
@@ -47,105 +146,51 @@ const App = () => {
               <AccordionItem>
                 <AccordionButton>
                   <Box flex="1" textAlign="left">
-                    Experimental design
+                    Loss Comparison
                   </Box>
                   <AccordionIcon />
                 </AccordionButton>
                 <AccordionPanel>
-                  <Accordion allowMultiple>
-                    <AccordionItem>
-                      <AccordionButton>
-                        <Box flex="1" textAlign="left">
-                          Comparison Among Models
-                        </Box>
-                        <AccordionIcon />
-                      </AccordionButton>
-                      <AccordionPanel> 
-                        <VStack align="start" spacing="4">
-                          <Link as={RouterLink} to="/model-a">Qwen2-1.5B-instruct</Link>
-                          <Link as={RouterLink} to="/model-b">Qwen2-0.5B-instruct</Link>
-                          <Link as={RouterLink} to="/model-c">Phi-3-mini-4k-instruct</Link>
-                        </VStack>
-                      </AccordionPanel>
-                    </AccordionItem>
-
-                    <AccordionItem>
-                      <AccordionButton>
-                        <Box flex="1" textAlign="left">
-                          Comparison Among Fine-Tuning Methods
-                        </Box>
-                        <AccordionIcon />
-                      </AccordionButton>
-                      <AccordionPanel>
-                        <VStack align="start" spacing="4">
-                          <Link as={RouterLink} to="/fine-tuning-method1">Lora</Link>
-                          <Link as={RouterLink} to="/fine-tuning-method2">QLora</Link>
-                          <Link as={RouterLink} to="/fine-tuning-method3">Freeze</Link>
-                        </VStack>
-                      </AccordionPanel>
-                    </AccordionItem>
-
-                    <AccordionItem>
-                      <AccordionButton>
-                        <Box flex="1" textAlign="left">
-                          Comparison Among dataset
-                        </Box>
-                        <AccordionIcon />
-                      </AccordionButton>
-                      <AccordionPanel>
-                        <VStack align="start" spacing="4">
-                          <Link as={RouterLink} to="/dataset1">MedQA</Link>
-                          <Link as={RouterLink} to="/dataset2">PubMedQA</Link>
-                        </VStack>
-                      </AccordionPanel>
-                    </AccordionItem>
-
-                    {/* 新增的 Loss Comparison 链接 */}
-                    <AccordionItem>
-                      <AccordionButton>
-                        <Box flex="1" textAlign="left">
-                          Loss Comparison
-                        </Box>
-                        <AccordionIcon />
-                      </AccordionButton>
-                      <AccordionPanel>
-                        <Link as={RouterLink} to="/loss-comparison">Loss Comparison</Link>
-                      </AccordionPanel>
-                    </AccordionItem>
-                  </Accordion>
+                  <Link as={RouterLink} to="/loss-comparison">Loss Comparison</Link>
                 </AccordionPanel>
               </AccordionItem>
 
               <AccordionItem>
                 <AccordionButton>
                   <Box flex="1" textAlign="left">
-                    Summary
+                    References
                   </Box>
                   <AccordionIcon />
                 </AccordionButton>
                 <AccordionPanel>
-                  <Link as={RouterLink} to="/summary">Summary</Link>
+                  <Link as={RouterLink} to="/references">References</Link>
                 </AccordionPanel>
               </AccordionItem>
             </Accordion>
           </Box>
 
-          <Box flex="1" p="4">
+          <Box flex="1" p="4" overflowY="auto" height="100vh">
             <Routes>
-              <Route path="/theories" element={<SupportingTheories />} />
-              <Route path="/model-introduction" element={<ModelIntroduction />} />
-              <Route path="/fine-tuning-method" element={<FineTuningMethod />} />
-              <Route path="/dataset-introduction" element={<DatasetIntroduction />} />
-              <Route path="/model-a" element={<ModelA />} />
-              <Route path="/model-b" element={<ModelB />} />
-              <Route path="/model-c" element={<ModelC />} />
-              <Route path="/fine-tuning-method1" element={<FineTuningMethod1 />} />
-              <Route path="/fine-tuning-method2" element={<FineTuningMethod2 />} />
-              <Route path="/fine-tuning-method3" element={<FineTuningMethod3 />} />
-              <Route path="/dataset1" element={<Dataset1 />} />
-              <Route path="/dataset2" element={<Dataset2 />} />
-              <Route path="/summary" element={<Summary />} />
-              <Route path="/loss-comparison" element={<LossComparison />} /> {/* Add the new route */}
+              <Route path="/introllm" element={<IntroLLM />} />
+              <Route path="/literature-review-llm" element={<LiteratureReviewLLM />} />
+              <Route path="/literature-review-fine-tuning" element={<LiteratureReviewFineTuning />} />
+              <Route path="/models" element={<Models />} />
+              <Route path="/fine-tuning-methods" element={<FineTuningMethods />} />
+              <Route path="/datasets" element={<Datasets />} />
+              <Route path="/llma-board" element={<LLaMABoard />} />
+              <Route path="/command-line" element={<CommandLine />} />
+              <Route path="/bleu-4" element={<Bleu4 />} />
+              <Route path="/rouge-l" element={<RougeL />} />
+              <Route path="/accuracy" element={<Accuracy />} />
+              <Route path="/hyperparameter-setting-and-result" element={<HyperparameterSetting />} />
+              <Route path="/Fine-tuning-Method-Comparison&Discussion" element={<FineTuningComparison />} />
+              <Route path="/LLM-Comparison&Discussion" element={<LLMComparison />} />
+              <Route path="/user-driven-evaluation-conclusion" element={<UserDrivenEvaluationConclusion />} />
+              <Route path="/limitations&future-work" element={<Limitations />} />
+              <Route path="/data-transform" element={<DataTransform />} />
+              <Route path="/hyperparameter-explore" element={<HyperparameterExplore />} />
+              <Route path="/loss-comparison" element={<LossComparison />} />
+              <Route path="/references" element={<References />} />
               <Route path="/page/:pageId" element={<Page />} />
               <Route path="/" element={<Page title="Home" />} />
             </Routes>

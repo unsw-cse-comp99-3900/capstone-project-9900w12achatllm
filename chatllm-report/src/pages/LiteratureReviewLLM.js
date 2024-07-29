@@ -1,7 +1,7 @@
-// src/pages/ModelIntroduction.js
+// src/pages/LiteratureReviewLLM.js
 import React from 'react';
 
-const ModelIntroduction = () => {
+const LiteratureReviewLLM = () => {
   return (
     <div>
       <h1>Model Introduction</h1>
@@ -10,4 +10,4 @@ const ModelIntroduction = () => {
   );
 };
 
-export default ModelIntroduction;
+export default LiteratureReviewLLM;

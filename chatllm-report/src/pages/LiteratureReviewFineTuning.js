@@ -1,7 +1,7 @@
-// src/pages/FineTuningMethod.js
+// src/pages/LiteratureReviewFineTuning.js
 import React from 'react';
 
-const FineTuningMethod = () => {
+const LiteratureReviewFineTuning = () => {
   return (
     <div>
       <h1>Fine-Tuning Method Introduction</h1>
@@ -10,4 +10,4 @@ const FineTuningMethod = () => {
   );
 };
 
-export default FineTuningMethod;
+export default LiteratureReviewFineTuning;
