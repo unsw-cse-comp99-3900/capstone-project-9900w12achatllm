@@ -11,9 +11,6 @@ import FineTuningMethods from './pages/FineTuningMethods';
 import Datasets from './pages/Datasets';
 import LLaMABoard from './pages/LLaMABoard';
 import CommandLine from './pages/CommandLine';
-import Bleu4 from './pages/Bleu4';
-import RougeL from './pages/RougeL';
-import Accuracy from './pages/Accuracy';
 import HyperparameterSetting from './pages/HyperparameterSetting';
 import FineTuningComparison from './pages/FineTuningComparison';
 import LLMComparison from './pages/LLMComparison';
@@ -22,19 +19,22 @@ import Limitations from './pages/Limitations';
 import DataTransform from './pages/DataTransform';
 import HyperparameterExplore from './pages/HyperparameterExplore';
 import References from './pages/References';
-import LossComparison from './pages/LossComparison'; // Import the new page component
-import Page from './Page';  // Assuming Page is a generic page component
+import Page from './Page';
+import Qwen05BInstruct from './pages/Qwen05BInstruct'; 
+import Qwen15BInstruct from './pages/Qwen15BInstruct'; 
+import Phi3Mini4KInstruct from './pages/Phi3Mini4KInstruct';
+import IntroductionAssessmentIndicators from './pages/IntroductionAssessmentIndicators';
 
 const App = () => {
   return (
     <ChakraProvider>
       <Router>
         <Flex minH="100vh">
-          <Box w="240px" bg="gray.800" color="white" p="4" overflowY="auto" height="100vh">
+          <Box w="280px" bg="gray.800" color="white" p="4" overflowY="auto" height="100vh">
             <Heading size="md" mb="4">COMP9900 CHATLLM REPORT</Heading>
 
-            {/* 1. System Architecture Diagram */}
             <Accordion allowMultiple>
+              {/* 1. System Architecture Diagram */}
               <AccordionItem>
                 <AccordionButton>
                   <Box flex="1" textAlign="left">
@@ -91,22 +91,8 @@ const App = () => {
                   <AccordionIcon />
                 </AccordionButton>
                 <AccordionPanel>
-                  <AccordionItem>
-                    <AccordionButton>
-                      <Box flex="1" textAlign="left">
-                        Introduction of the Assessment Indicators
-                      </Box>
-                      <AccordionIcon />
-                    </AccordionButton>
-                    <AccordionPanel>
-                      <VStack align="start" spacing="4">
-                        <Link as={RouterLink} to="/bleu-4">BLEU-4</Link>
-                        <Link as={RouterLink} to="/rouge-l">ROUGE-L</Link>
-                        <Link as={RouterLink} to="/accuracy">Accuracy</Link>
-                      </VStack>
-                    </AccordionPanel>
-                  </AccordionItem>
                   <VStack align="start" spacing="4">
+                    <Link as={RouterLink} to="/introduction-assessment-indicators">Introduction of the Assessment Indicators</Link>
                     <Link as={RouterLink} to="/hyperparameter-setting-and-result">Hyperparameter Setting and Result</Link>
                     <Link as={RouterLink} to="/Fine-tuning-Method-Comparison&Discussion">Fine-tuning Method Comparison & Discussion</Link>
                     <Link as={RouterLink} to="/LLM-Comparison&Discussion">Large Language Model Comparison & Discussion</Link>
@@ -151,7 +137,11 @@ const App = () => {
                   <AccordionIcon />
                 </AccordionButton>
                 <AccordionPanel>
-                  <Link as={RouterLink} to="/loss-comparison">Loss Comparison</Link>
+                  <VStack align="start" spacing="4">
+                    <Link as={RouterLink} to="/loss-comparison/qwen-05b-instruct">Qwen2-0.5B-instruct</Link>
+                    <Link as={RouterLink} to="/loss-comparison/qwen-15b-instruct">Qwen2-1.5B-instruct</Link>
+                    <Link as={RouterLink} to="/loss-comparison/phi3-mini-4k-instruct">Phi3-mini-4K-instruct</Link>
+                  </VStack>
                 </AccordionPanel>
               </AccordionItem>
 
@@ -179,9 +169,6 @@ const App = () => {
               <Route path="/datasets" element={<Datasets />} />
               <Route path="/llama-board" element={<LLaMABoard />} />
               <Route path="/command-line" element={<CommandLine />} />
-              <Route path="/bleu-4" element={<Bleu4 />} />
-              <Route path="/rouge-l" element={<RougeL />} />
-              <Route path="/accuracy" element={<Accuracy />} />
               <Route path="/hyperparameter-setting-and-result" element={<HyperparameterSetting />} />
               <Route path="/Fine-tuning-Method-Comparison&Discussion" element={<FineTuningComparison />} />
               <Route path="/LLM-Comparison&Discussion" element={<LLMComparison />} />
@@ -189,10 +176,13 @@ const App = () => {
               <Route path="/limitations&future-work" element={<Limitations />} />
               <Route path="/data-transform" element={<DataTransform />} />
               <Route path="/hyperparameter-explore" element={<HyperparameterExplore />} />
-              <Route path="/loss-comparison" element={<LossComparison />} />
+              <Route path="/loss-comparison/qwen-05b-instruct" element={<Qwen05BInstruct />} />
+              <Route path="/loss-comparison/qwen-15b-instruct" element={<Qwen15BInstruct />} />
+              <Route path="/loss-comparison/phi3-mini-4k-instruct" element={<Phi3Mini4KInstruct />} />
               <Route path="/references" element={<References />} />
+              <Route path="/introduction-assessment-indicators" element={<IntroductionAssessmentIndicators />} />
               <Route path="/page/:pageId" element={<Page />} />
-              <Route path="/" element={<Page title="Home" />} />
+              <Route path="/" element={<IntroLLM />} />
             </Routes>
           </Box>
         </Flex>

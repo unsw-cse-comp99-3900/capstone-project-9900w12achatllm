@@ -1,28 +1,28 @@
 import React, { useState, useEffect } from 'react';
 import { Box, Heading, Select, VStack, Text, Image, Flex } from '@chakra-ui/react';
 
-const LossComparison = () => {
-  const [fineTuneMethod, setFineTuneMethod] = useState('lora');
+const Qwen05BInstruct = () => {
+  const [fineTuneMethod, setFineTuneMethod] = useState('LoRA');
   const [parameterName, setParameterName] = useState('Batch Size');
   const [parameterValue, setParameterValue] = useState('2');
 
-  const fineTuneOptions = ['lora', 'qlora', 'full'];
-  const parameterNameOptions = ['Batch Size', 'Max Example', 'Learning Rate', 'Epoch'];
+  const fineTuneOptions = ['LoRA', 'QLoRA', 'Full Parameter Fine-Tuning'];
+  const hyperparameterOptions = ['Batch Size', 'Max Example', 'Learning Rate', 'Epoch'];
 
-  const getParameterValues = (fineTuneMethod, parameterName) => {
+  const getHyperparameterValues = (fineTuneMethod, parameterName) => {
     switch (parameterName) {
       case 'Batch Size':
-        if (fineTuneMethod === 'full') {
+        if (fineTuneMethod === 'Full Parameter Fine-Tuning') {
           return [1, 2];
         }
         return [2, 6];
       case 'Max Example':
-        if (fineTuneMethod === 'full') {
+        if (fineTuneMethod === 'Full Parameter Fine-Tuning') {
           return [100, 250, 500];
         }
         return [250, 500, 1000];
       case 'Learning Rate':
-        if (fineTuneMethod === 'full') {
+        if (fineTuneMethod === 'Full Parameter Fine-Tuning') {
           return ['5e-6', '1e-6', '5e-7'];
         }
         return ['5e-5', '1e-5', '1e-4', '5e-4'];
@@ -34,25 +34,32 @@ const LossComparison = () => {
   };
 
   useEffect(() => {
-    const values = getParameterValues(fineTuneMethod, parameterName);
+    const values = getHyperparameterValues(fineTuneMethod, parameterName);
     setParameterValue(values[0]);
   }, [fineTuneMethod, parameterName]);
 
   const getLossChartSrc = (type) => {
-    const method = fineTuneMethod.toLowerCase();
+    const methodMap = {
+      'LoRA': 'lora',
+      'QLoRA': 'qlora',
+      'Full Parameter Fine-Tuning': 'full'
+    };
+    const method = methodMap[fineTuneMethod];
     const paramValue = String(parameterValue).toLowerCase();
     const paramSuffix = parameterName === 'Batch Size' ? `batch${paramValue}`
                       : parameterName === 'Max Example' ? `me${paramValue}`
                       : parameterName === 'Learning Rate' ? `${paramValue}`
                       : `epoch${paramValue}`;
 
-    return `pictures/Q0.5B_${method}_${paramSuffix}_${type}.png`;
+    const src = `/pictures/Q0.5B_${method}_${paramSuffix}_${type}.png`;
+    console.log(src); 
+    return src;
   };
 
   return (
     <Box p={4}>
-      <Heading as="h1" size="xl" mb={4}>Loss Comparison</Heading>
-      <Text mb={4}>Please select the fine-tuning method, parameter name, and parameter value to compare loss.</Text>
+      <Heading as="h1" size="xl" mb={4}>Loss curve for the Qwen2-0.5B-instruct model</Heading>
+      <Text mb={4}>Please select the fine-tuning method and hyperparameters to compare loss.</Text>
       
       <Flex spacing={4} align="center" mb={4}>
         <Box mr={4}>
@@ -67,9 +74,9 @@ const LossComparison = () => {
         </Box>
 
         <Box mr={4}>
-          <Text>Parameter Name</Text>
+          <Text>Hyperparameter Name</Text>
           <Select value={parameterName} onChange={(e) => setParameterName(e.target.value)}>
-            {parameterNameOptions.map((option) => (
+            {hyperparameterOptions.map((option) => (
               <option key={option} value={option}>
                 {option}
               </option>
@@ -78,9 +85,9 @@ const LossComparison = () => {
         </Box>
 
         <Box>
-          <Text>Parameter Value</Text>
+          <Text>Hyperparameter Value</Text>
           <Select value={parameterValue} onChange={(e) => setParameterValue(e.target.value)} isDisabled={!parameterName}>
-            {getParameterValues(fineTuneMethod, parameterName).map((value) => (
+            {getHyperparameterValues(fineTuneMethod, parameterName).map((value) => (
               <option key={value} value={value}>
                 {value}
               </option>
@@ -105,6 +112,14 @@ const LossComparison = () => {
   );
 };
 
-export default LossComparison;
+export default Qwen05BInstruct;
+
+
+
+
+
+
+
+
 
 
