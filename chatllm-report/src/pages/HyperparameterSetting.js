@@ -1,6 +1,6 @@
 // src/pages/HyperparameterSetting.js
 import React from 'react';
-import { Box, Heading, Text, Table, Thead, Tbody, Tr, Th, Td, Image } from '@chakra-ui/react';
+import { Box, Heading, Text, Table, Thead, Tbody, Tr, Th, Td, Image, SimpleGrid } from '@chakra-ui/react';
 
 const HyperparameterSetting = () => {
   return (
@@ -133,8 +133,38 @@ const HyperparameterSetting = () => {
         After setting the optimal hyperparameters according to the tables shown above, we trained the three models using the three fine-tuning methods Freeze, LoRA, QLoRA (Qwen2-0.5B-instrcut added the Full method) and the two datasets PubMedQA and MedQA separately, and the results are shown below:
       </Text>
       <Image src="pictures/report_pic_9.png" alt="Accuracy formula" mb={4} />
+
+      {/* 新增的图片展示 */}
+      <SimpleGrid columns={3} spacing={4} mt={4}>
+        <Box textAlign="center">
+          <Image src="pictures/The scatterplot of Accuracy.png" alt="The scatterplot of Accuracy" />
+          <Text>The scatterplot of Accuracy</Text>
+        </Box>
+        <Box textAlign="center">
+          <Image src="pictures/The scatterplot of Bleu-4.png" alt="The scatterplot of Bleu-4" />
+          <Text>The scatterplot of Bleu-4</Text>
+        </Box>
+        <Box textAlign="center">
+          <Image src="pictures/The scatterplot of Rouge-L.png" alt="The scatterplot of Rouge-L" />
+          <Text>The scatterplot of Rouge-L</Text>
+        </Box>
+        <Box textAlign="center">
+          <Image src="pictures/The bar chart of Accuracy.png" alt="The bar chart of Accuracy" />
+          <Text>The bar chart of Accuracy</Text>
+        </Box>
+        <Box textAlign="center">
+          <Image src="pictures/The bar chart of Bleu-4.png" alt="The bar chart of Bleu-4" />
+          <Text>The bar chart of Bleu-4</Text>
+        </Box>
+        <Box textAlign="center">
+          <Image src="pictures/The bar chart of Rouge.png" alt="The bar chart of Rouge" />
+          <Text>The bar chart of Rouge</Text>
+        </Box>
+      </SimpleGrid>
     </Box>
   );
 };
 
 export default HyperparameterSetting;
+
+
