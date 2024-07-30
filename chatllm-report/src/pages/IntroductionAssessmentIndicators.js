@@ -51,4 +51,3 @@ const IntroductionAssessmentIndicators = () => {
 };
 
 export default IntroductionAssessmentIndicators;
-

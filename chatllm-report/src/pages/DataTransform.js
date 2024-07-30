@@ -72,8 +72,8 @@ target_data.append(question_entry)`}
       </Box>
       <Text fontSize="lg" mb={4} textAlign="justify">
         The detailed data transformation code can be found in the Appendix and on GitHub: 
-        <Link href="https://github.com/unsw-cse-comp99-3900-24t1/capstone-project-9900w12achatllm/blob/main/data_transform.py" target="_blank" rel="noopener noreferrer">
-          https://github.com/unsw-cse-comp99-3900-24t1/capstone-project-9900w12achatllm/blob/main/data_transform.py
+        <Link href="https://github.com/unsw-cse-comp99-3900-24t1/capstone-project-9900w12achatllm/tree/main/Notebook" isExternal color="teal.500">
+          https://github.com/unsw-cse-comp99-3900-24t1/capstone-project-9900w12achatllm/tree/main/Notebook
         </Link>
       </Text>
     </Box>

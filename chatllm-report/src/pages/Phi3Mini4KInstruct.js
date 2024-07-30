@@ -5,11 +5,12 @@ const PhiInstruct = () => {
   const [fineTuneMethod, setFineTuneMethod] = useState('LoRA');
   const [parameterName, setParameterName] = useState('Batch Size');
   const [parameterValue, setParameterValue] = useState('2');
+  const [analysis, setAnalysis] = useState({});
 
   const fineTuneOptions = ['LoRA', 'QLoRA', 'Freeze'];
   const hyperparameterOptions = ['Batch Size', 'Max Example', 'Learning Rate', 'Epoch'];
 
-  const getHyperparameterValues = (fineTuneMethod, parameterName) => {
+  const getHyperparameterValues = (parameterName) => {
     switch (parameterName) {
       case 'Batch Size':
         return [2, 6];
@@ -24,10 +25,53 @@ const PhiInstruct = () => {
     }
   };
 
+  const analysisData = {
+    'Batch Size': {
+      intro: "Under the constraints of available hardware, we tested the maximum batch size that can be used. A larger batch size can improve training stability and reduce training time, but our hardware conditions mean that we cannot use a batch size that is too large. A small batch size can easily lead to unstable gradient estimation and loss curves.",
+      summary: [
+        "When the batch size is 6, we can see that the training curves of the three fine-tuning methods are relatively smooth. So we set the batch size to 6 for subsequent training.",
+        "Freeze: 6",
+        "LoRA: 6",
+        "QLoRA: 6"
+      ]
+    },
+    'Max Example': {
+      intro: "We tested the smallest acceptable max example that does not affect the training results. This means the model might only need a certain number of high-quality samples to achieve convergence. A smaller max example can reduce training time, but an excessively large max example may lead to overfitting.",
+      summary: [
+        "It can be seen that the three fine-tuning methods did not reach convergence when max samples were 250, but when this value reached 500, the model converged.",
+        "Freeze: 500",
+        "LoRA: 500",
+        "QLoRA: 500"
+      ]
+    },
+    'Learning Rate': {
+      intro: "Adjusting the learning rate to observe its impact on model performance. An appropriate learning rate can accelerate model convergence and improve performance.",
+      summary: [
+        "When the learning rate (lr) is 5e-04 (too high), we can see that the loss of the validation set is increasing, resulting in overfitting in all three fine-tuning methods. When it is set to 5e-05, both the training set and the validation set converge stably. When it is set to 1e-05 (too low), the model was in a local optimal point.",
+        "Freeze: 5e-05",
+        "LoRA: 1e-04",
+        "QLoRA: 1e-04"
+      ]
+    },
+    'Epoch': {
+      intro: "We need to set a suitable epoch to ensure model convergence and alleviate overfitting. A high epoch will make the model converge more fully and more accurately. However, it is easy to cause overfitting and prolong the training time.",
+      summary: [
+        "When the epoch is set too high, the freeze method can be seen to overfit (the validation set loss increases). When the epoch is 3, both the training set and the validation set of all fine-tuning methods converge stably.",
+        "Freeze: 3",
+        "LoRA: 3",
+        "QLoRA: 3"
+      ]
+    }
+  };
+
   useEffect(() => {
-    const values = getHyperparameterValues(fineTuneMethod, parameterName);
+    const values = getHyperparameterValues(parameterName);
     setParameterValue(values[0]);
   }, [fineTuneMethod, parameterName]);
+
+  useEffect(() => {
+    setAnalysis(analysisData[parameterName] || {});
+  }, [parameterName]);
 
   const getLossChartSrc = (type) => {
     const methodMap = {
@@ -78,7 +122,7 @@ const PhiInstruct = () => {
         <Box>
           <Text>Hyperparameter Value</Text>
           <Select value={parameterValue} onChange={(e) => setParameterValue(e.target.value)} isDisabled={!parameterName}>
-            {getHyperparameterValues(fineTuneMethod, parameterName).map((value) => (
+            {getHyperparameterValues(parameterName).map((value) => (
               <option key={value} value={value}>
                 {value}
               </option>
@@ -102,47 +146,14 @@ const PhiInstruct = () => {
 
       <Box mt={8}>
         <Text fontSize="lg" mb={4} textAlign="justify">
-          <strong>Hyperparameter 1: Batch Size</strong><br />
-          <strong>Goal:</strong> Test the largest batch size possible, as long as the hardware allows. A large batch size can improve training stability and reduce training time, but our hardware conditions mean that we cannot use a batch size that is too large. A small batch size can easily lead to unstable gradient estimation and loss curves.
+          <strong>Hyperparameter – {parameterName}</strong><br />
+          {analysis.intro}
         </Text>
         <Text fontSize="lg" mb={4} textAlign="justify">
-          <strong>Conclusions:</strong> When the batch size is 6, we can see that the training curves of the three fine-tuning methods are relatively smooth. So we set the batch size to 6 for subsequent training.<br />
-          Freeze: 6<br />
-          LoRA: 6<br />
-          QLoRA: 6
-        </Text>
-
-        <Text fontSize="lg" mb={4} textAlign="justify">
-          <strong>Hyperparameter 2: Max Samples</strong><br />
-          <strong>Goal:</strong> Find the minimum number of samples that can make the model converge. Max samples control the number of random samples used as training samples. Due to limited computing power, we cannot choose too large training data. But fortunately, we found in our experiments that even if the sample size does not need to be too large, the model can converge, and a small max example can reduce training time. Therefore, the quality of data is more important than the quantity.
-        </Text>
-        <Text fontSize="lg" mb={4} textAlign="justify">
-          <strong>Conclusion:</strong> It can be seen that the three fine-tuning methods did not reach convergence when max samples were 250, but when this value reached 500, the model converged.<br />
-          Freeze: 500<br />
-          LoRA: 500<br />
-          QLoRA: 500
-        </Text>
-
-        <Text fontSize="lg" mb={4} textAlign="justify">
-          <strong>Hyperparameter 3: Learning Rate</strong><br />
-          <strong>Goal:</strong> Find the best learning rate. A low learning rate can find the optimal point more accurately. However, this will make the training time too long or the model will be in a local optimal point. A high learning rate will shorten the training time and will not easily reach the local optimal point, but it may deviate from the optimal point and there will be a risk of overfitting.
-        </Text>
-        <Text fontSize="lg" mb={4} textAlign="justify">
-          <strong>Conclusion:</strong> When the learning rate (lr) is 5e-04 (too high), we can see that the loss of the validation set is increasing, resulting in overfitting in all three fine-tuning methods. When it is set to 5e-05, both the training set and the validation set converge stably. When it is set to 1e-05 (too low), the model was in a local optimal point.<br />
-          Freeze: 5e-05<br />
-          LoRA: 1e-04<br />
-          QLoRA: 1e-04
-        </Text>
-
-        <Text fontSize="lg" mb={4} textAlign="justify">
-          <strong>Hyperparameter 4: Epochs</strong><br />
-          <strong>Goal:</strong> We need to set a suitable epoch to ensure model convergence and alleviate overfitting. A high epoch will make the model converge more fully and more accurately. However, it is easy to cause overfitting and prolong the training time.
-        </Text>
-        <Text fontSize="lg" mb={4} textAlign="justify">
-          <strong>Conclusion:</strong> When the epoch is set too high, the freeze method can be seen to overfit (the validation set loss increases). When the epoch is 3, both the training set and the validation set of all fine-tuning methods converge stably.<br />
-          Freeze: 3<br />
-          LoRA: 3<br />
-          QLoRA: 3
+          <strong>Summary:</strong><br />
+          {analysis.summary && analysis.summary.map((item, index) => (
+            <Text key={index} mb={2}>{item}</Text>
+          ))}
         </Text>
       </Box>
     </Box>
@@ -150,5 +161,3 @@ const PhiInstruct = () => {
 };
 
 export default PhiInstruct;
-
-
