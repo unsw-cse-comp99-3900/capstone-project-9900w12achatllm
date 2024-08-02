@@ -164,7 +164,6 @@ user.config
 saves/
 cache/
 
-data/
 model/
 PubMedQA/
 MedQA/
