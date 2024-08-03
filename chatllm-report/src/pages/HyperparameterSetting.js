@@ -134,7 +134,7 @@ const HyperparameterSetting = () => {
       </Text>
       <Image src="pictures/report_pic_9.png" alt="Accuracy formula" mb={4} />
 
-      {/* 新增的图片展示 */}
+
       <SimpleGrid columns={3} spacing={4} mt={4}>
         <Box textAlign="center">
           <Image src="pictures/The scatterplot of Accuracy.png" alt="The scatterplot of Accuracy" />

@@ -1,70 +1,32 @@
-# Getting Started with Create React App
+# Frontend Setup and Overview for ChatLLM-Report
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## How to Run the Application
 
-## Available Scripts
+To get the frontend up and running, please follow these steps:
 
-In the project directory, you can run:
+1. **Navigate to the `chatllm-report` directory** in your terminal.
+2. **Execute the command** `npm start` to start the application.
+3. If you encounter any errors during the startup, it may be due to package dependency issues. In that case, try running:
+`npm install react-mathjax-preview --legacy-peer-deps` to resolve these issues.
+By following these instructions, you should be able to successfully launch the ChatLLM-Report web application.
 
-### `npm start`
+## Frontend Overview
+The ChatLLM-Report web application provides a user-friendly interface designed to align closely with the contents of our comprehensive report, as specified by our client. The main features of the frontend are outlined below:
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+### Navigation and Structure
+The web interface features a dashboard with a navigation bar located on the left-hand side. This navigation bar is structured to mirror the table of contents of our report. By clicking on each item in the navigation bar, users can access different pages that demonstrate various aspects of our work. The design ensures that the navigation elements are almost identical to the structure of the report, with minor differences noted in the training loss results.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+### Content Consistency and Enhancements
+Most of the content on the web pages is kept identical to that of the report to maintain consistency. Various web components are employed to enhance the visual appeal and user interaction. For example, in sections detailing engineering practices, we have replaced static images with interactive code components.
 
-### `npm test`
+### Hyperparameter Settings
+The appearance of hyperparameter settings has been formatted to provide a clear and organized display, making it easier for users to understand the configurations used during the model training process.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### Loss Graphs Display
+Distinct from the report, the loss graphs obtained during the training process are showcased under the "Loss Comparison" section of the website. This section is divided into three subsections, each representing a different set of comparisons among various hyperparameters. Due to the extensive number of loss graphs generated, it was impractical to include all of them in the printed report. Instead, they are effectively displayed on the website, where users can navigate through different subsections to view the corresponding loss graphs and conclusions.
 
-### `npm run build`
+### Interactive Features
+The website allows for interactive exploration of data. By clicking on designated boxes within the "Loss Comparison" section, users can view detailed loss graphs and the associated analytical conclusions, enhancing their understanding of the model's performance under different conditions.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+This frontend setup ensures that users have a comprehensive and interactive experience, closely mirroring the analytical depth and scope of our report.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)

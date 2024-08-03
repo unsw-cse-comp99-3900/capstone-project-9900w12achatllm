@@ -13,13 +13,19 @@ const Qwen15BInstruct = () => {
   const getHyperparameterValues = (fineTuneMethod, parameterName) => {
     switch (parameterName) {
       case 'Batch Size':
-        return [2, 6];
+        return [2, 3];
       case 'Max Example':
-        return [250, 500, 1000];
+        if (fineTuneMethod === 'LoRA') {
+          return [250, 500, 1000]; 
+        }
+        return [250, 500, 750];
       case 'Learning Rate':
+        if (fineTuneMethod === 'Freeze') {
+          return ['5e-5', '1e-5', '1e-4'];
+        }
         return ['5e-5', '1e-5', '1e-4', '5e-4'];
       case 'Epoch':
-        return [3, 5];
+        return [2, 3, 5];
       default:
         return [];
     }

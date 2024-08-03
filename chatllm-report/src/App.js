@@ -1,11 +1,9 @@
 import React from 'react';
 import { ChakraProvider, Box, Flex, Heading, Accordion, AccordionItem, AccordionButton, AccordionPanel, AccordionIcon, VStack, Link } from '@chakra-ui/react';
 import { BrowserRouter as Router, Route, Routes, Link as RouterLink } from 'react-router-dom';
-
-// Import page components
 import IntroLLM from './pages/IntroLLM';
-import LiteratureReviewLLM from './pages/LiteratureReviewLLM';
-import LiteratureReviewFineTuning from './pages/LiteratureReviewFineTuning';
+import StructureLLM from './pages/StructureLLM';
+import StructureFineTuningMethods from './pages/StructureFineTuningMethods';
 import Models from './pages/Models';
 import FineTuningMethods from './pages/FineTuningMethods';
 import Datasets from './pages/Datasets';
@@ -45,8 +43,8 @@ const App = () => {
                 <AccordionPanel>
                   <VStack align="start" spacing="4">
                     <Link as={RouterLink} to="/introllm">Introduction of Large Language Models</Link>
-                    <Link as={RouterLink} to="/literature-review-llm">Literature Review of Large Language Models</Link>
-                    <Link as={RouterLink} to="/literature-review-fine-tuning">Literature Review of Fine-tuning Methods</Link>
+                    <Link as={RouterLink} to="/StructureLLM">The Structure of Large Language Models</Link>
+                    <Link as={RouterLink} to="/StructureFineTuningMethods">The Structure of Fine-tuning Methods</Link>
                   </VStack>
                 </AccordionPanel>
               </AccordionItem>
@@ -114,6 +112,7 @@ const App = () => {
                 </AccordionPanel>
               </AccordionItem>
 
+              {/* 5. Engineering Practices*/}
               <AccordionItem>
                 <AccordionButton>
                   <Box flex="1" textAlign="left">
@@ -129,6 +128,7 @@ const App = () => {
                 </AccordionPanel>
               </AccordionItem>
 
+              {/* 6. Loss Comparison*/}
               <AccordionItem>
                 <AccordionButton>
                   <Box flex="1" textAlign="left">
@@ -145,6 +145,7 @@ const App = () => {
                 </AccordionPanel>
               </AccordionItem>
 
+              {/* 7. References*/}
               <AccordionItem>
                 <AccordionButton>
                   <Box flex="1" textAlign="left">
@@ -162,8 +163,8 @@ const App = () => {
           <Box flex="1" p="4" overflowY="auto" height="100vh">
             <Routes>
               <Route path="/introllm" element={<IntroLLM />} />
-              <Route path="/literature-review-llm" element={<LiteratureReviewLLM />} />
-              <Route path="/literature-review-fine-tuning" element={<LiteratureReviewFineTuning />} />
+              <Route path="/StructureLLM" element={<StructureLLM />} />
+              <Route path="/StructureFineTuningMethods" element={<StructureFineTuningMethods />} />
               <Route path="/models" element={<Models />} />
               <Route path="/fine-tuning-methods" element={<FineTuningMethods />} />
               <Route path="/datasets" element={<Datasets />} />

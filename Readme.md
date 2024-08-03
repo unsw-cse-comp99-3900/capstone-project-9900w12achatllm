@@ -77,3 +77,5 @@ with open(file_path, 'w') as file:
 Dataset source: [MedQA](https://github.com/jind11/MedQA) and [pubmedqa](https://github.com/pubmedqa/pubmedqa)
 
 This project is developed based on [Llama-Factory](https://github.com/hiyouga/LLaMA-Factory). We have used the Llama-Factory framework as the foundation for fine-tuning large models and have made necessary modifications to adapt it to our datasets and specific requirements. 
+
+##### Please read the README located in the chatllm-report folder for information about the frontend section.
