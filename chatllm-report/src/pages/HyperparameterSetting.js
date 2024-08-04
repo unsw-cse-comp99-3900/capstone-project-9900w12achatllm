@@ -1,4 +1,4 @@
-// src/pages/HyperparameterSetting.js
+
 import React from 'react';
 import { Box, Heading, Text, Table, Thead, Tbody, Tr, Th, Td, Image, SimpleGrid } from '@chakra-ui/react';
 

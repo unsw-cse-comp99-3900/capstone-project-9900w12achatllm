@@ -22,6 +22,8 @@ import Qwen05BInstruct from './pages/Qwen05BInstruct';
 import Qwen15BInstruct from './pages/Qwen15BInstruct'; 
 import Phi3Mini4KInstruct from './pages/Phi3Mini4KInstruct';
 import IntroductionAssessmentIndicators from './pages/IntroductionAssessmentIndicators';
+import StructureFineModels from './pages/StructureFineModels';
+
 
 const App = () => {
   return (
@@ -45,6 +47,7 @@ const App = () => {
                     <Link as={RouterLink} to="/introllm">Introduction of Large Language Models</Link>
                     <Link as={RouterLink} to="/StructureLLM">The Structure of Large Language Models</Link>
                     <Link as={RouterLink} to="/StructureFineTuningMethods">The Structure of Fine-tuning Methods</Link>
+                    <Link as={RouterLink} to="/StructureFineModels">The Structure of Fine-tuning the Models</Link>
                   </VStack>
                 </AccordionPanel>
               </AccordionItem>
@@ -165,6 +168,7 @@ const App = () => {
               <Route path="/introllm" element={<IntroLLM />} />
               <Route path="/StructureLLM" element={<StructureLLM />} />
               <Route path="/StructureFineTuningMethods" element={<StructureFineTuningMethods />} />
+              <Route path="/StructureFineModels" element={<StructureFineModels />} />
               <Route path="/models" element={<Models />} />
               <Route path="/fine-tuning-methods" element={<FineTuningMethods />} />
               <Route path="/datasets" element={<Datasets />} />

@@ -1,4 +1,4 @@
-// src/pages/LiteratureReviewLLM.js
+
 import React from 'react';
 import { Box, Heading, Text, Image } from '@chakra-ui/react';
 

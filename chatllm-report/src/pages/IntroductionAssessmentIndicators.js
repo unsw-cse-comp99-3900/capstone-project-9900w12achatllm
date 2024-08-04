@@ -1,4 +1,4 @@
-// src/pages/IntroductionAssessmentIndicators.js
+
 import React from 'react';
 import { Box, Heading, Text } from '@chakra-ui/react';
 import MathJax from 'react-mathjax-preview';

@@ -1,4 +1,4 @@
-// src/pages/References.js
+
 import React from 'react';
 import { Box, Heading, Text, Link, List, ListItem } from '@chakra-ui/react';
 

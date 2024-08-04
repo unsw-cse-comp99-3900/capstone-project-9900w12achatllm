@@ -1,4 +1,4 @@
-// src/pages/CommandLine.js
+
 import React from 'react';
 import { Box, Heading, Text, Image } from '@chakra-ui/react';
 
